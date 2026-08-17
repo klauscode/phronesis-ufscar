@@ -459,9 +459,9 @@ export const COURSES = [
       "Profa. Dra. Carolina Severino Lopes da Costa",
       "Profa. Dra. Vanessa Cristina Paulino"
     ],
-    dia: "Sexta-feira",
-    diaKey: "sexta",
-    diaIndex: 5,
+    dia: "Segunda-feira",
+    diaKey: "segunda",
+    diaIndex: 1,
     horario: "08:00 - 12:00",
     startHour: 8,
     endHour: 12,
@@ -483,9 +483,9 @@ export const COURSES = [
     professores: [
       "Profa. Dra. Lara Ferreira dos Santos"
     ],
-    dia: "Segunda-feira",
-    diaKey: "segunda",
-    diaIndex: 1,
+    dia: "Sexta-feira",
+    diaKey: "sexta",
+    diaIndex: 5,
     horario: "08:00 - 12:00",
     startHour: 8,
     endHour: 12,
