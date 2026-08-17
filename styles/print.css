@@ -1,0 +1,98 @@
+/* ==========================================================================
+   PRINT STYLESHEET - ACADEMIC SCHEDULE 2026/02
+   Optimized for A4 / Letter Paper Output & Archival
+   ========================================================================== */
+
+@media print {
+  *, *::before, *::after {
+    background: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  @page {
+    margin: 1.2cm;
+    size: landscape;
+  }
+
+  body {
+    background: #ffffff !important;
+    font-size: 9pt;
+    line-height: 1.3;
+  }
+
+  /* Hide interactive controls and chrome during print */
+  .control-deck,
+  .header-actions,
+  .card-actions-row,
+  .btn-plan-toggle,
+  .toast-container,
+  .modal-overlay,
+  .stats-strip,
+  .search-wrapper,
+  .view-tabs-container {
+    display: none !important;
+  }
+
+  .app-wrapper {
+    max-width: 100% !important;
+    padding: 0 !important;
+    gap: 1cm !important;
+  }
+
+  .academic-header {
+    border: none !important;
+    border-bottom: 2pt solid #000000 !important;
+    border-radius: 0 !important;
+    padding: 0 0 10pt 0 !important;
+  }
+
+  .brand-headline {
+    font-size: 14pt !important;
+  }
+
+  .timetable-container {
+    border: 1pt solid #000000 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .timetable-grid {
+    min-width: 100% !important;
+    gap: 0 !important;
+    border-collapse: collapse;
+  }
+
+  .grid-header-cell,
+  .time-slot-label,
+  .grid-day-column-cell {
+    border: 0.5pt solid #333333 !important;
+    border-radius: 0 !important;
+    padding: 4pt !important;
+  }
+
+  .matrix-card {
+    border: 0.5pt solid #666666 !important;
+    border-radius: 2pt !important;
+    margin-bottom: 4pt;
+    page-break-inside: avoid;
+  }
+
+  .matrix-card::before {
+    display: none !important;
+  }
+
+  .card-code-badge,
+  .room-chip,
+  .card-nature-badge {
+    border: 0.5pt solid #000000 !important;
+  }
+
+  .perfil-section {
+    border: 0.5pt solid #000000 !important;
+    page-break-inside: avoid;
+    margin-bottom: 12pt;
+  }
+}

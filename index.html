@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PHRONESIS 2026/02 - Dashboard Acadêmico de Horários por Gabriel Klaus Aguiar • Licenciatura em Educação Especial UFSCar.">
+  <title>PHRONESIS • Gabriel Klaus Aguiar • UFSCar 2026/02</title>
+
+  <!-- Google Fonts & Styles -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/print.css" media="print">
+  <link rel="icon" type="image/jpeg" href="assets/phronesis_logo.jpg">
+</head>
+<body>
+
+  <div class="studio-shell">
+
+    <!-- ================= TOPBAR NAVIGATION ================= -->
+    <header class="studio-topbar" role="banner">
+      <div class="topbar-brand">
+        <img src="assets/phronesis_logo.jpg" alt="Phronesis Owl Emblem" class="brand-logo-img" style="width: 40px; height: 40px; border-radius: var(--radius-sm); object-fit: cover; box-shadow: 0 0 16px rgba(99, 102, 241, 0.4); border: 1px solid rgba(255,255,255,0.15);">
+        <div class="brand-text">
+          <div class="brand-name">
+            PHRONESIS <span style="font-family:var(--font-brand); font-size:0.82rem; opacity:0.9; font-weight:700; color:var(--p2-text); letter-spacing:0.04em;">• ΦΡΟΝΗΣΙΣ</span>
+            <span class="term-tag">2026/02</span>
+          </div>
+          <span class="brand-dept">UFSCar • Educação Especial &bull; <strong style="color:var(--text-primary); font-weight:700;">Gabriel Klaus Aguiar</strong></span>
+        </div>
+      </div>
+
+      <!-- Live Global Search with Shortcut -->
+      <div class="topbar-search-box">
+        <span class="search-icon-left" aria-hidden="true">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input 
+          type="text" 
+          id="global-search-input" 
+          class="search-input-field" 
+          placeholder="Buscar aula, docente, sala ou código..."
+          aria-label="Buscar disciplinas"
+          autocomplete="off"
+        >
+        <span class="search-kbd-shortcut" title="Pressione / para buscar">/</span>
+      </div>
+
+      <!-- Top Tools & Actions -->
+      <div class="topbar-actions">
+        <!-- My Plan Trigger Button -->
+        <button class="btn-studio btn-studio-primary" id="btn-open-planner-drawer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span>Meu Plano</span>
+          <span class="pill-badge-count" id="topbar-plan-badge" style="background:rgba(255,255,255,0.25); color:#fff;">0</span>
+        </button>
+
+        <!-- Export iCal (.ics) -->
+        <button class="btn-studio" id="btn-export-full-ics" title="Exportar todas as disciplinas para Google/Apple Calendar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Exportar .ICS</span>
+        </button>
+
+        <!-- Print -->
+        <button class="btn-studio btn-studio-icon" id="btn-print-studio" title="Imprimir Grade">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button class="btn-studio btn-studio-icon" id="btn-theme-switcher" title="Alternar tema claro/escuro">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ================= STUDIO BODY ================= -->
+    <div class="studio-body">
+
+      <!-- LEFT SIDEBAR CONTROL RAIL -->
+      <aside class="studio-sidebar" role="complementary" aria-label="Controles do Semestre">
+
+        <!-- Perfil Switcher -->
+        <div>
+          <div class="sidebar-section-title">
+            <span>Perfis Curriculares</span>
+            <span class="pill-badge-count">4 Perfis</span>
+          </div>
+          <div class="perfil-pills-list" role="tablist">
+            <button class="perfil-pill-btn active" data-perfil="all" role="tab">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span class="pill-glow-dot dot-all"></span>
+                <span>Todos os Perfis</span>
+              </div>
+              <span class="pill-badge-count">18</span>
+            </button>
+
+            <button class="perfil-pill-btn" data-perfil="2" role="tab">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span class="pill-glow-dot dot-p2"></span>
+                <span>Perfil 2 (4º Sem.)</span>
+              </div>
+              <span class="pill-badge-count">4</span>
+            </button>
+
+            <button class="perfil-pill-btn" data-perfil="4" role="tab">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span class="pill-glow-dot dot-p4"></span>
+                <span>Perfil 4 (6º Sem.)</span>
+              </div>
+              <span class="pill-badge-count">6</span>
+            </button>
+
+            <button class="perfil-pill-btn" data-perfil="6" role="tab">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span class="pill-glow-dot dot-p6"></span>
+                <span>Perfil 6 (7º Sem.)</span>
+              </div>
+              <span class="pill-badge-count">3</span>
+            </button>
+
+            <button class="perfil-pill-btn" data-perfil="8" role="tab">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <span class="pill-glow-dot dot-p8"></span>
+                <span>Perfil 8 (8º Sem.)</span>
+              </div>
+              <span class="pill-badge-count">5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Weekly Workload Dynamic Gauge -->
+        <div class="workload-gauge-card">
+          <div class="gauge-circle-container">
+            <svg width="56" height="56" viewBox="0 0 36 36">
+              <path
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="rgba(255,255,255,0.1)"
+                stroke-width="3.5"
+              />
+              <path
+                id="workload-svg-progress"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                stroke="url(#progressGrad)"
+                stroke-dasharray="0, 100"
+                stroke-width="3.5"
+                stroke-linecap="round"
+              />
+              <defs>
+                <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#3b82f6" />
+                  <stop offset="100%" stop-color="#6366f1" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="gauge-text-val" id="gauge-hours-val">0h</span>
+          </div>
+          <div class="workload-info">
+            <span class="workload-label">Carga do Meu Plano</span>
+            <span class="workload-subtext" id="gauge-subtext">0 disciplinas selecionadas</span>
+          </div>
+        </div>
+
+        <!-- Mini Calendar Widget (Semester Radar) -->
+        <div class="mini-calendar-widget">
+          <div class="mini-cal-header">
+            <span>Agosto 2026</span>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Início Semestre</span>
+          </div>
+          <div class="mini-cal-days-grid">
+            <span class="mini-cal-day-head">D</span>
+            <span class="mini-cal-day-head">S</span>
+            <span class="mini-cal-day-head">T</span>
+            <span class="mini-cal-day-head">Q</span>
+            <span class="mini-cal-day-head">Q</span>
+            <span class="mini-cal-day-head">S</span>
+            <span class="mini-cal-day-head">S</span>
+
+            <!-- Sample Calendar Days -->
+            <span class="mini-cal-day-num" style="opacity:0.3;">26</span>
+            <span class="mini-cal-day-num" style="opacity:0.3;">27</span>
+            <span class="mini-cal-day-num" style="opacity:0.3;">28</span>
+            <span class="mini-cal-day-num" style="opacity:0.3;">29</span>
+            <span class="mini-cal-day-num" style="opacity:0.3;">30</span>
+            <span class="mini-cal-day-num" style="opacity:0.3;">31</span>
+            <span class="mini-cal-day-num">1</span>
+
+            <span class="mini-cal-day-num">2</span>
+            <span class="mini-cal-day-num">3</span>
+            <span class="mini-cal-day-num">4</span>
+            <span class="mini-cal-day-num">5</span>
+            <span class="mini-cal-day-num">6</span>
+            <span class="mini-cal-day-num">7</span>
+            <span class="mini-cal-day-num">8</span>
+
+            <span class="mini-cal-day-num">9</span>
+            <span class="mini-cal-day-num">10</span>
+            <span class="mini-cal-day-num">11</span>
+            <span class="mini-cal-day-num">12</span>
+            <span class="mini-cal-day-num">13</span>
+            <span class="mini-cal-day-num">14</span>
+            <span class="mini-cal-day-num">15</span>
+
+            <span class="mini-cal-day-num">16</span>
+            <span class="mini-cal-day-num active-class-day current-day" title="17/08 - Início das Aulas">17</span>
+            <span class="mini-cal-day-num active-class-day">18</span>
+            <span class="mini-cal-day-num active-class-day">19</span>
+            <span class="mini-cal-day-num active-class-day">20</span>
+            <span class="mini-cal-day-num active-class-day">21</span>
+            <span class="mini-cal-day-num">22</span>
+          </div>
+        </div>
+
+        <!-- Shift & Nature Quick Toggles -->
+        <div>
+          <div class="sidebar-section-title">
+            <span>Filtros Rápidos</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.4rem;">
+            <div class="quick-filter-toggles">
+              <button class="filter-badge-toggle" data-turno="Manhã">☀️ Manhã</button>
+              <button class="filter-badge-toggle" data-turno="Tarde">🌆 Tarde</button>
+              <button class="filter-badge-toggle" data-carater="Obrigatória">🔒 Obrigatórias</button>
+              <button class="filter-badge-toggle" data-carater="Optativa">⭐ Optativas</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gabriel Klaus Aguiar Signature Seal -->
+        <div style="margin-top:auto; padding-top:1rem; border-top:1px solid var(--border-subtle); display:flex; flex-direction:column; gap:0.25rem;">
+          <span style="font-family:var(--font-brand); font-size:0.75rem; font-weight:800; color:var(--text-primary); display:flex; align-items:center; gap:0.35rem;">
+            <span>⚡ PHRONESIS STUDIO</span>
+          </span>
+          <span style="font-size:0.74rem; color:var(--text-muted);">
+            Desenvolvido por <strong>Gabriel Klaus Aguiar</strong>
+          </span>
+          <span style="font-family:var(--font-mono); font-size:0.68rem; color:var(--p2-text); opacity:0.85;">
+            « Φρόνησις &bull; 2026/02 »
+          </span>
+        </div>
+
+      </aside>
+
+      <!-- MAIN WORKSPACE STAGE -->
+      <main class="studio-workspace" role="main">
+
+        <!-- Workspace Nav Bar -->
+        <div class="workspace-nav-bar">
+          <nav class="view-mode-tabs" role="tablist" aria-label="Modos de exibição">
+            <button class="view-mode-tab active" data-view="matrix" role="tab" aria-selected="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+              <span>Grade Semanal</span>
+            </button>
+
+            <button class="view-mode-tab" data-view="bento" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              <span>Painel Bento</span>
+            </button>
+
+            <button class="view-mode-tab" data-view="planner" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span>Meu Planner</span>
+            </button>
+
+            <button class="view-mode-tab" data-view="rooms" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span>Salas &amp; ATs</span>
+            </button>
+
+            <button class="view-mode-tab" data-view="faculty" role="tab" aria-selected="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span>Docentes</span>
+            </button>
+          </nav>
+
+          <div style="display:flex; align-items:center; gap:0.6rem;">
+            <span class="pill-badge-count" id="active-matches-counter">18 disciplinas</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Main Stage Canvas -->
+        <div id="dynamic-workspace-canvas">
+          <!-- Injected via app.js -->
+        </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- ================= SLIDE-OUT INSPECTOR DRAWER ================= -->
+  <div class="inspector-backdrop" id="inspector-backdrop">
+    <aside class="inspector-drawer" role="dialog" aria-modal="true" aria-label="Detalhes da Aula">
+      <div class="inspector-header" id="inspector-header-area">
+        <!-- Injected via JS -->
+      </div>
+      <div class="inspector-body" id="inspector-body-area">
+        <!-- Injected via JS -->
+      </div>
+      <div class="inspector-footer" id="inspector-footer-area">
+        <!-- Injected via JS -->
+      </div>
+    </aside>
+  </div>
+
+  <!-- ================= TOAST CONTAINER ================= -->
+  <div class="toast-container" id="app-toast-container"></div>
+
+  <!-- App Script -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
